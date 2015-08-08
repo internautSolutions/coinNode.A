@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var bitcoinapi = require('bitcoin-node-api');
+var express = require('express');
+var app = express();
+ 
+//Username and password relate to those set in the bitcoin.conf file 
+ 
+var wallet = {
+  host: 'localhost',
+  port: 8332,
+  user: 'bitcoinrpc',
+  pass: '2U8B43mS76951G7dQUKsB5YTHnCyANEAPWsuaaJAXD368'
+};
+ 
+bitcoinapi.setWalletDetails(wallet);
+bitcoinapi.setAccess('default-safe'); //Access control 
+app.use('/bitcoin/api', bitcoinapi.app); //Bind the middleware to any chosen url 
+ 
+app.listen(3000);
+console.log('btcAPI is running');
